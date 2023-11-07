@@ -31,22 +31,30 @@ async function fetchData() {
       phone.textContent = `${users[randomId[i]].phone}`;
       button.textContent = "Edit";
       button.classList.add("edit");
+      button.addEventListener("click", function () {
+        editDetails(users[randomId[i]]);
+      });
       box.appendChild(fullName);
       box.appendChild(age);
       box.appendChild(email);
       box.appendChild(phone);
       box.appendChild(button);
       container.appendChild(box);
-      document
-        .querySelector(".career-container")
-        .addEventListener("click", function (event) {
-          if (event.target && event.target.classList.contains("edit-button")) {
-            window.location.href = "applynow.html";
-          }
-        });
+      // document
+      //   .querySelector(".career-container")
+      //   .addEventListener("click", function (event) {
+      //     if (event.target && event.target.classList.contains("edit-button")) {
+      //       window.location.href = "applynow.html";
+      //     }
+      //   });
     }
   } catch (error) {
     console.error("error:", error);
   }
 }
 fetchData();
+
+function editDetails(data) {
+  localStorage.setItem('currentData', JSON.stringify(data));
+  window.location.href = 'applynow.html';
+}
